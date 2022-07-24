@@ -26464,6 +26464,16 @@ class MovieView extends _reactDefault.default.Component {
         }));
     }
 }
+MovieView.propTypes = {
+    movie: PropTypes.shape({
+        Title: PropTypes.string.isRequired,
+        Description: PropTypes.string.isRequired,
+        ImagePath: PropTypes.string.isRequired,
+        Actors: PropTypes.string,
+        ReleaseYear: PropTypes.string
+    }).isRequired,
+    onBackClick: PropTypes.func.isRequired
+};
 
   $parcel$ReactRefreshHelpers$3741.postlude(module);
 } finally {
@@ -29666,65 +29676,7 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "LoginView", ()=>LoginView
-) /*  
-import React from 'react';
-
-export class LoginView extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      username: '',
-      password: ''
-    }
-
-    this.onUsernameChange = this.onUsernameChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-  };
-
-  onUsernameChange(event) {
-    this.setState({
-      username: event.target.value
-    });
-  }
-
-  onPasswordChange(event) {
-    this.setState({
-      password: event.target.value
-    });
-  }
-
-  handleSubmit() {
-    const { username, password } = this.state;
-    console.log(username, password);
-
-    Send a request to the server for authentication
-    then call this.props.onLoggedIn(username)
-    this.props.onLoggedIn(username);
-  } 
-
-  render() {
-    return (
-      <form>
-        <label>
-          Username:
-          <input type="text" value={this.state.username} onChange={this.onUsernameChange} />
-        </label>
-        <label>
-          Password:
-          <input type="password" value={this.state.password} onChange={this.onPasswordChange} />
-        </label>
-        <button type="button" onClick={this.handleSubmit}>Submit</button>
-      </form>
-    );
-  }
-
-
-} 
-
-*/ ;
+);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -29795,13 +29747,97 @@ function LoginView(props) {
                     lineNumber: 26
                 },
                 __self: this,
-                children: "Submit"
+                children: "Login"
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                __source: {
+                    fileName: "src/components/login-view/login-view.jsx",
+                    lineNumber: 27
+                },
+                __self: this,
+                children: [
+                    "Not yet a member? ",
+                    /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                        href: "",
+                        __source: {
+                            fileName: "src/components/login-view/login-view.jsx",
+                            lineNumber: 27
+                        },
+                        __self: this,
+                        children: "Sign Up"
+                    })
+                ]
             })
         ]
     }));
 }
 _s(LoginView, "wuQOK7xaXdVz4RMrZQhWbI751Oc=");
 _c = LoginView;
+LoginView.propTypes = {
+    user: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired
+    }).isRequired,
+    onLoggedIn: PropTypes.func.isRequired
+}; /*  
+import React from 'react';
+
+export class LoginView extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      password: ''
+    }
+
+    this.onUsernameChange = this.onUsernameChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+  };
+
+  onUsernameChange(event) {
+    this.setState({
+      username: event.target.value
+    });
+  }
+
+  onPasswordChange(event) {
+    this.setState({
+      password: event.target.value
+    });
+  }
+
+  handleSubmit() {
+    const { username, password } = this.state;
+    console.log(username, password);
+
+    Send a request to the server for authentication
+    then call this.props.onLoggedIn(username)
+    this.props.onLoggedIn(username);
+  } 
+
+  render() {
+    return (
+      <form>
+        <label>
+          Username:
+          <input type="text" value={this.state.username} onChange={this.onUsernameChange} />
+        </label>
+        <label>
+          Password:
+          <input type="password" value={this.state.password} onChange={this.onPasswordChange} />
+        </label>
+        <button type="button" onClick={this.handleSubmit}>Submit</button>
+      </form>
+    );
+  }
+
+
+} 
+
+*/ 
 var _c;
 $RefreshReg$(_c, "LoginView");
 
