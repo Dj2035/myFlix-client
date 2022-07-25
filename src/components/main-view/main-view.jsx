@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -18,14 +19,35 @@ class MainView extends React.Component {
     };
   }
 
-  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
-  setSelectedMovie(newSelectedMovie) {
+  componentDidMount() {
+    axios.get('https://jude-movie-api.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  /*When a movie is clicked, this function is invoked and updates the state of 
+  the `selectedMovie` *property to that movie*/
+  setSelectedMovie(movie) {
     this.setState({
-      selectedMovie: newSelectedMovie
+      selectedMovie: movie
     });
   }
 
-  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+  //When a user successfully registers
+  onRegistration(register) {
+    this.setState({
+      register
+    });
+  }
+
+  /* When a user successfully logs in, this function updates the `user` 
+  property in state to that *particular user*/
   onLoggedIn(user) {
     this.setState({
       user
@@ -33,7 +55,9 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user } = this.state; //ES6 feature for const movies = this.state.movies
+    const { movies, selectedMovie, user, register } = this.state; //ES6 feature for const movies = this.state.movies
+
+    if (!register) return <RegistrationView onRegistration={register => this.onRegistration(register)} />
 
     /* If there is no user, the LoginView is rendered. 
     If there is a user logged in, the user details are *passed as a prop to the LoginView */
@@ -53,18 +77,6 @@ class MainView extends React.Component {
         }
       </div>
     );
-  }
-
-  componentDidMount() {
-    axios.get('https://jude-movie-api.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
   }
 
 
