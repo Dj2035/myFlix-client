@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from "prop-types";
 
 
 export function RegistrationView(props) {
@@ -9,10 +10,10 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
+    console.log(username, password, email, birthday);
     /* Send a request to the server for authentication */
     /* then call props.onLoggedIn(username) */
-    //props.onLoggedIn(username);
+    props.onRegistration(username);
   }
 
   return (
@@ -47,5 +48,6 @@ RegistrationView.propTypes = {
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
     Birthday: PropTypes.date
-  }).isRequired
+  }).isRequired,
+  onRegistration: PropTypes.func.isRequired
 };
