@@ -25419,12 +25419,14 @@ class MainView extends _reactDefault.default.Component {
         this.state = {
             movies: [],
             selectedMovie: null,
-            user: null
+            user: null,
+            page: 'login'
         };
     }
     componentDidMount() {
         _axiosDefault.default.get('https://jude-movie-api.herokuapp.com/movies').then((response)=>{
             this.setState({
+                ...this.state,
                 movies: response.data
             });
         }).catch((error)=>{
@@ -25434,39 +25436,52 @@ class MainView extends _reactDefault.default.Component {
     /*When a movie is clicked, this function is invoked and updates the state of 
   the `selectedMovie` *property to that movie*/ setSelectedMovie(movie) {
         this.setState({
+            ...this.state,
             selectedMovie: movie
         });
     }
     //When a user successfully registers
     onRegistration(register) {
         this.setState({
+            ...this.state,
             register
+        });
+    }
+    onPageChange(page) {
+        this.setState({
+            ...this.state,
+            page: page
         });
     }
     /* When a user successfully logs in, this function updates the `user` 
   property in state to that *particular user*/ onLoggedIn(user) {
         this.setState({
+            ...this.state,
             user
         });
     }
     render() {
-        const { movies , selectedMovie , user , register  } = this.state; //ES6 feature for const movies = this.state.movies
-        if (!register) return(/*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
+        const { movies , selectedMovie , user , register , page  } = this.state; //ES6 feature for const movies = this.state.movies
+        if (page === "register") return(/*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
+            onPageChange: (page1)=>this.onPageChange(page1)
+            ,
             onRegistration: (register1)=>this.onRegistration(register1)
             ,
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 60
+                lineNumber: 72
             },
             __self: this
         }));
         /* If there is no user, the LoginView is rendered. 
-    If there is a user logged in, the user details are *passed as a prop to the LoginView */ if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+    If there is a user logged in, the user details are *passed as a prop to the LoginView */ if (page === "login" && !user) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+            onPageChange: (page1)=>this.onPageChange(page1)
+            ,
             onLoggedIn: (user1)=>this.onLoggedIn(user1)
             ,
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 64
+                lineNumber: 76
             },
             __self: this
         }));
@@ -25475,7 +25490,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 67
+                lineNumber: 79
             },
             __self: this
         }));
@@ -25483,7 +25498,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 70
+                lineNumber: 82
             },
             __self: this,
             children: selectedMovie ? /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
@@ -25493,7 +25508,7 @@ class MainView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 73
+                    lineNumber: 85
                 },
                 __self: this
             }) : movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
@@ -25503,7 +25518,7 @@ class MainView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 75
+                        lineNumber: 87
                     },
                     __self: this
                 }, movie._id)
@@ -29967,7 +29982,9 @@ function LoginView(props) {
                 children: [
                     "Not yet a member? ",
                     /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                        href: "",
+                        href: "javascript:void(0)",
+                        onClick: ()=>props.onPageChange("register")
+                        ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
                             lineNumber: 28
@@ -30193,7 +30210,9 @@ function RegistrationView(props) {
                 children: [
                     "Already a member? ",
                     /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                        href: "",
+                        href: "javascript:void(0)",
+                        onClick: ()=>props.onPageChange("login")
+                        ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
                             lineNumber: 39
