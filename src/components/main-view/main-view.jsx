@@ -15,7 +15,8 @@ class MainView extends React.Component {
     this.state = {
       movies: [],
       selectedMovie: null,
-      user: null
+      user: null,
+      page: 'login'
     };
   }
 
@@ -23,6 +24,7 @@ class MainView extends React.Component {
     axios.get('https://jude-movie-api.herokuapp.com/movies')
       .then(response => {
         this.setState({
+          ...this.state,
           movies: response.data
         });
       })
@@ -35,6 +37,7 @@ class MainView extends React.Component {
   the `selectedMovie` *property to that movie*/
   setSelectedMovie(movie) {
     this.setState({
+      ...this.state,
       selectedMovie: movie
     });
   }
@@ -42,7 +45,15 @@ class MainView extends React.Component {
   //When a user successfully registers
   onRegistration(register) {
     this.setState({
+      ...this.state,
       register
+    });
+  }
+
+  onPageChange(page) {
+    this.setState({
+      ...this.state,
+      page: page
     });
   }
 
@@ -50,18 +61,19 @@ class MainView extends React.Component {
   property in state to that *particular user*/
   onLoggedIn(user) {
     this.setState({
+      ...this.state,
       user
     });
   }
 
   render() {
-    const { movies, selectedMovie, user, register } = this.state; //ES6 feature for const movies = this.state.movies
+    const { movies, selectedMovie, user, register, page } = this.state; //ES6 feature for const movies = this.state.movies
 
-    if (!register) return <RegistrationView onRegistration={register => this.onRegistration(register)} />
+    if (page === "register") return <RegistrationView onPageChange={(page) => this.onPageChange(page)} onRegistration={register => this.onRegistration(register)} />
 
     /* If there is no user, the LoginView is rendered. 
     If there is a user logged in, the user details are *passed as a prop to the LoginView */
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (page === "login" && !user) return <LoginView onPageChange={(page) => this.onPageChange(page)} onLoggedIn={user => this.onLoggedIn(user)} />;
 
     // Before the movies have been loaded
     if (movies.length === 0) return <div className="main-view" />;
