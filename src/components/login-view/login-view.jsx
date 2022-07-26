@@ -25,7 +25,7 @@ export function LoginView(props) {
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
       <button type="submit" onClick={handleSubmit}>Login</button>
-      <p>Not yet a member? <a href="">Sign Up</a></p>
+      <p>Not yet a member? <a href="javascript:void(0)" onClick={() => props.onPageChange("register")}>Sign Up</a></p>
     </form>
   );
 

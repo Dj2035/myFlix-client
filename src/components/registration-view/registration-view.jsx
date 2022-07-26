@@ -36,7 +36,7 @@ export function RegistrationView(props) {
       </label>
 
       <button type="submit" onClick={handleSubmit}>Sign Up</button>
-      <p>Already a member? <a href="">Sign in</a></p>
+      <p>Already a member? <a href="javascript:void(0)" onClick={() => props.onPageChange("login")}>Sign in</a></p>
     </form>
   );
 
