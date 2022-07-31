@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import PropTypes from "prop-types";
+
+import "./login-view.scss";
 
 
 export function LoginView(props) {
@@ -15,18 +18,46 @@ export function LoginView(props) {
   }
 
   return (
-    <form>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <button type="submit" onClick={handleSubmit}>Login</button>
-      <p>Not yet a member? <a href="javascript:void(0)" onClick={() => props.onPageChange("register")}>Sign Up</a></p>
-    </form>
+    <Container className="login-view" >
+      <Row className="justify-content-md-center">
+        <Col md={6}>
+          <Card>
+            <Card.Body>
+              <Card.Title className="text-center">Login to MyFlix</Card.Title>
+              <Form>
+                <Form.Group className="mb-3" controlId="formUsername">
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    required
+                    placeholder="Enter a username"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formPassword">
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    placeholder="Enter a password"
+                  />
+                </Form.Group>
+                <Button className="mb-1" variant="primary" type="submit" onClick={handleSubmit}>
+                  Login
+                </Button>
+              </Form>
+              <Card.Text>
+                Not yet a member? <Card.Link href="javascript:void(0)" onClick={() => props.onPageChange("register")}>Sign Up</Card.Link>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 
 }
