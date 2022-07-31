@@ -1,4 +1,37 @@
-.my-flix {
-  color: steelblue;
+html {
+  background-color: #051622;
+  font-size: 1.1rem;
+}
+
+.app-container {
+  background-color: #051622;
+}
+.movieCard {
+  width: 100%;
+  height: 200px;
+  margin: 20px;
+}
+
+.btn.btn-link {
+  font-weight: 500;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+.movie-poster {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.movie-view {
+  color: white;
+}
+.login-view {
+  margin-top: 200px;
+}
+.registration-view {
+  margin-top: 100px;
 }
 /*# sourceMappingURL=index.caa67093.css.map */
