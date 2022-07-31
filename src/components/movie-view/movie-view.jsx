@@ -1,62 +1,65 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
+import { Button, Container, Row, Col, Accordion } from "react-bootstrap";
+
+import "./movie-view.scss"
+
 export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} crossOrigin="true" />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-        <div className="movie-actors">
-          <span className="label">Actors: </span>
-          <span className="value">{movie.Actors}</span>
-        </div>
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.Genre.Name}</span>
-        </div>
-        <div className="genre-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Genre.Description}</span>
-        </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
-        </div>
-        <div className="director-bio">
-          <span className="label">Bio: </span>
-          <span className="value">{movie.Director.Bio}</span>
-        </div>
-        <div className="director-birthyear">
-          <span className="label">BirthYear: </span>
-          <span className="value">{movie.Director.Birth}</span>
-        </div>
-        <div className="director-deathyear">
-          <span className="label">DeathYear: </span>
-          <span className="value">{movie.Director.Death}</span>
-        </div>
-        <div className="movie-release-year">
-          <span className="label">Release year: </span>
-          <span className="value">{movie.ReleaseYear}</span>
-        </div>
-        <div className="movie-button-div">
-          <button onClick={() => { onBackClick(null); }} >Back</button>
-        </div>
+      <Container className="movie-view">
+        <Row className="movie-poster mb-3">
+          <Col>
+            <img src={movie.ImagePath} crossOrigin="true" />
+          </Col>
+        </Row>
+        <Row className="movie-title mb-2">
+          <Col className="label" xs lg="2">Title: </Col>
+          <Col className="value">{movie.Title}</Col>
+        </Row>
+        <Row className="movie-description mb-2">
+          <Col className="label" xs lg="2">Description: </Col>
+          <Col className="value">{movie.Description}</Col>
+        </Row>
+        <Row className="movie-actors mb-2">
+          <Col className="label" xs lg="2">Actors: </Col>
+          <Col className="value">{movie.Actors}</Col>
+        </Row>
+        <Row className="movie-genre mb-1">
+          <Col className="label" xs lg="2">Genre: </Col>
+          <Col className="value">{movie.Genre.Name}</Col>
+        </Row>
+        <Row className="genre-description mb-2">
+          <Col className="label" xs lg="2">Description: </Col>
+          <Col className="value">{movie.Genre.Description}</Col>
+        </Row>
+        <Row className="movie-director mb-1">
+          <Col className="label" xs lg="2">Director: </Col>
+          <Col className="value">{movie.Director.Name}</Col>
+        </Row>
+        <Row className="director-bio mb-1">
+          <Col className="label" xs lg="2">Bio: </Col>
+          <Col className="value">{movie.Director.Bio}</Col>
+        </Row>
+        <Row className="director-birthyear mb-1">
+          <Col className="label" xs lg="2">BirthYear: </Col>
+          <Col className="value">{movie.Director.Birth}</Col>
+        </Row>
+        <Row className="director-deathyear mb-2">
+          <Col className="label" xs lg="2">DeathYear: </Col>
+          <Col className="value">{movie.Director.Death}</Col>
+        </Row>
+        <Row className="movie-release-year mb-2">
+          <Col className="label" xs lg="2">Release year: </Col>
+          <Col className="value">{movie.ReleaseYear}</Col>
+        </Row>
 
-
-      </div>
+        <Button className="movie-button-div" onClick={() => { onBackClick(null); }} >Back</Button>
+      </Container>
     );
   }
 
