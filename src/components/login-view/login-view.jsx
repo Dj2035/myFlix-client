@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Card, Row, Col, Container } from 'react-bootstrap';
 import PropTypes from "prop-types";
+import axios from 'axios';
 
 import "./login-view.scss";
 
@@ -8,14 +9,49 @@ import "./login-view.scss";
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  // Declare hooks for each input
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+
+  // validate user inputs
+  function validate() {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr('Username Required');
+      isReq = false;
+    } else if (username.length < 5) {
+      setUsernameErr('Username must be atleast 5 characters long');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('Password Required');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr('Password must be 6 characters long');
+      isReq = false;
+    }
+
+    return isReq;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
-  }
+    const isReq = validate();
+    if (isReq) {
+      /* Send a request to the server for authentication */
+      axios.post('https://jude-movie-api.herokuapp.com/login', {
+        Username: username,
+        Password: password
+      })
+        .then(response => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch(e => {
+          console.log('No such user')
+        });
+    }
+  };
 
   return (
     <Container className="login-view" >
@@ -32,8 +68,10 @@ export function LoginView(props) {
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                     required
-                    placeholder="Enter a username"
+                    placeholder="Enter username"
                   />
+                  {/* code added here to display validation error */}
+                  {usernameErr && <p>{usernameErr}</p>}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formPassword">
@@ -43,21 +81,23 @@ export function LoginView(props) {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     required
-                    placeholder="Enter a password"
+                    placeholder="Enter password"
                   />
+                  {/* code added here to display validation error */}
+                  {passwordErr && <p>{passwordErr}</p>}
                 </Form.Group>
                 <Button className="mb-1" variant="primary" type="submit" onClick={handleSubmit}>
                   Login
                 </Button>
               </Form>
               <Card.Text>
-                Not yet a member? <Card.Link href="javascript:void(0)" onClick={() => props.onPageChange("register")}>Sign Up</Card.Link>
+                No account yet! <Card.Link href="javascript:void(0)" >Sign Up</Card.Link>
               </Card.Text>
             </Card.Body>
           </Card>
         </Col>
       </Row>
-    </Container>
+    </Container >
   );
 
 }
