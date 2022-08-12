@@ -129,7 +129,7 @@ export function RegistrationView(props) {
           </Form>
           <Button className="mb-1" type="submit" onClick={handleRegister}>Register</Button>
           <Card.Text>
-            Already registered? <Card.Link href="javascript:void(0)">Sign in</Card.Link>
+            Already registered? <Card.Link to={"/"}>Sign in</Card.Link>
           </Card.Text>
         </Card.Body>
       </Card>
