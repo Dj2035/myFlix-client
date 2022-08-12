@@ -1,7 +1,4 @@
-html {
-  background-color: #051622;
-  font-size: 1.1rem;
-}
+
 .movieCard {
   width: 100%;
   height: 200px;
@@ -20,16 +17,14 @@ html {
   justify-content: center;
   margin-bottom: 15px;
 }
-
-.movie-view {
-  color: white;
-}
 .login.view {
   margin-top: 200px;
 }
 .registration-view {
   margin-top: 100px;
 }
+
+
 
 
 .fav-movie {
