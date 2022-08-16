@@ -8,7 +8,7 @@ import "./movie-view.scss"
 
 export class MovieView extends React.Component {
 
-  addMovie = (movieId) => {
+  addFavMovie = (movieId) => {
     let username = localStorage.getItem("user");
     let token = localStorage.getItem("token");
 
@@ -76,7 +76,7 @@ export class MovieView extends React.Component {
           </Card.Body>
 
           <Card.Footer>
-            <Button className="button ml-2" onClick={() => { this.addMovie(movie, user); }}>
+            <Button className="button ml-2" onClick={() => { this.addFavMovie(movie, user); }}>
               Add to favorites
             </Button>
             <Button className="button ml-2" onClick={() => { onBackClick(null); }} >

@@ -40897,7 +40897,7 @@ var _reactRouterDom = require("react-router-dom");
 var _reactBootstrap = require("react-bootstrap");
 var _movieViewScss = require("./movie-view.scss");
 class MovieView extends _reactDefault.default.Component {
-    addMovie = (movieId)=>{
+    addFavMovie = (movieId)=>{
         let username = localStorage.getItem("user");
         let token = localStorage.getItem("token");
         axios.post(`https://jude-movie-api.herokuapp.com/users/${username}/movies/${movieId}`, {
@@ -41186,7 +41186,7 @@ class MovieView extends _reactDefault.default.Component {
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                 className: "button ml-2",
                                 onClick: ()=>{
-                                    this.addMovie(movie, user);
+                                    this.addFavMovie(movie, user);
                                 },
                                 __source: {
                                     fileName: "src/components/movie-view/movie-view.jsx",
