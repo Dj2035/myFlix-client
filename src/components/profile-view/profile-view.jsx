@@ -10,6 +10,7 @@ import UpdateUser from './update-user';
 import './profile-view.scss';
 
 export function ProfileView(props) {
+  const { onBackClick } = props;
   const [user, setUser] = useState(props.user);
   const [movies, setMovies] = useState(props.movies);
   const [favouriteMovies, setFavouriteMovies] = useState([]);
@@ -22,7 +23,8 @@ export function ProfileView(props) {
     })
       .then(response => {
         setUser(response.data);
-        setFavouriteMovies(response.data.FavouriteMovies)
+        setFavouriteMovies(response.data.FavoriteMovies);
+        console.log(response.data);
       })
       .catch((error) => console.error(error));
   };
@@ -39,33 +41,34 @@ export function ProfileView(props) {
       .then(() => {
         alert(`The account ${user.Username} was successfully deleted.`)
         localStorage.clear();
-        window.open('/register', '_self');
+        window.open('/', '_self');
       })
       .catch(error => console.error(error))
   };
 
   return (
-    <Container>
+    <Container >
       <Row>
         <Col xs={12} sm={4}>
-          <Card>
-            <Card.Title>Your Info</Card.Title>
-            <Card.Body>
+          <Card bg="dark">
+            <Card.Body >
+              <Card.Title>Your Info</Card.Title>
               <Row className="mb-2">
-                <Col className="label" xs lg="3">Username: </Col>
-                <Col className="value" xs lg="9">{user.Username}</Col>
+                <Col className="label" xs lg={4} >Username: </Col>
+                <Col className="value" xs lg={8} >{user.Username}</Col>
               </Row>
               <Row className="mb-2">
-                <Col className="label" xs lg="3">Email: </Col>
-                <Col className="value" xs lg="9">{user.Email}</Col>
+                <Col className="label" xs lg={4}>Email: </Col>
+                <Col className="value" xs lg={8}>{user.Email}</Col>
               </Row>
             </Card.Body>
           </Card>
 
         </Col>
         <Col xs={12} sm={8}>
-          <Card>
+          <Card className="bg-dark">
             <Card.Body>
+              <Card.Title>Want to change some info?</Card.Title>
               <UpdateUser user={user} />
               <Button className="d-block mt-5" variant="danger" onClick={handleDelete}>Delete profile</Button>
             </Card.Body>
@@ -80,7 +83,8 @@ export function ProfileView(props) {
           token={token}
         />
       </Row>
-      <Button className="button ml-2" onClick={() => { onBackClick(null); }} >
+
+      <Button className="button ml-2" onClick={() => { onBackClick(); }} >
         Back
       </Button>
 
