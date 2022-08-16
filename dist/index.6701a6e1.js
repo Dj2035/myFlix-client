@@ -45212,7 +45212,7 @@ $RefreshReg$(_c, "Menubar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","./navbar.scss":"eqSoH","@parcel/transformer-js/src/esmodule-helpers.js":"3EToe","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"87rkw","react-router-dom":"cpyQW"}],"eqSoH":[function() {},{}],"ck15y":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","react-router-dom":"cpyQW","./navbar.scss":"eqSoH","@parcel/transformer-js/src/esmodule-helpers.js":"3EToe","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"87rkw"}],"eqSoH":[function() {},{}],"ck15y":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f8cc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -45515,7 +45515,9 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactBootstrap = require("react-bootstrap");
 var _favoriteMovies = require("./favorite-movies");
+var _favoriteMoviesDefault = parcelHelpers.interopDefault(_favoriteMovies);
 var _updateUser = require("./update-user");
+var _updateUserDefault = parcelHelpers.interopDefault(_updateUser);
 var _profileViewScss = require("./profile-view.scss");
 var _s = $RefreshSig$();
 function ProfileView(props) {
@@ -45686,7 +45688,7 @@ function ProfileView(props) {
                                 },
                                 __self: this,
                                 children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_updateUser.UpdateUser, {
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_updateUserDefault.default, {
                                         user: user,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
@@ -45694,7 +45696,7 @@ function ProfileView(props) {
                                         },
                                         __self: this
                                     }),
-                                    /*#__PURE__*/ _jsxRuntime.jsx(Button, {
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                         className: "d-block mt-5",
                                         variant: "danger",
                                         onClick: handleDelete,
@@ -45717,7 +45719,7 @@ function ProfileView(props) {
                     lineNumber: 75
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_favoriteMovies.FavMovies, {
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_favoriteMoviesDefault.default, {
                     movies: movies,
                     favouriteMovies: favouriteMovies,
                     currentUser: currentUser,
@@ -45729,7 +45731,7 @@ function ProfileView(props) {
                     __self: this
                 })
             }),
-            /*#__PURE__*/ _jsxRuntime.jsx(Button, {
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                 className: "button ml-2",
                 onClick: ()=>{
                     onBackClick(null);
@@ -45942,11 +45944,11 @@ var _s = $RefreshSig$();
 function UpdateUser(props) {
     _s();
     const { user  } = props;
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [values, setValues] = useState({
+    const [username, setUsername] = _react.useState('');
+    const [password, setPassword] = _react.useState('');
+    const [email, setEmail] = _react.useState('');
+    const [birthday, setBirthday] = _react.useState('');
+    const [values, setValues] = _react.useState({
         usernameErr: '',
         passwordErr: '',
         emailErr: ''
@@ -46212,6 +46214,6 @@ $RefreshReg$(_c, "UpdateUser");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"3EToe","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"87rkw","axios":"iYoWk"}],"gb0ga":[function() {},{}]},["jYGLx","wqLbX","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"3EToe","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"87rkw"}],"gb0ga":[function() {},{}]},["jYGLx","wqLbX","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map
