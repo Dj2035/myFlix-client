@@ -80,7 +80,7 @@ class MainView extends React.Component {
       <Router>
         <Menubar user={user} />
         <Container fluid>
-          <Row className="main-view justify-content-md-center">
+          <Row className="main-view justify-content-md-center mt-3">
             <Route
               exact
               path="/"
@@ -128,7 +128,7 @@ class MainView extends React.Component {
                 if (movies.length === 0) return <div className="main-view" />;
 
                 return (
-                  <Col md={8}>
+                  <Col sm={12} md={8}>
                     <MovieView
                       user={user}
                       movie={movies.find(m => m._id === match.params.movieId)}
