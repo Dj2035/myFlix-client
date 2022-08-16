@@ -1,27 +1,51 @@
+html {
+  background-color: #051622;
+}
 
+.app-container {
+  background-color: #051622;
+}
+
+@media (max-width: 797px) {
+  body {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
 .movieCard {
-  width: 100%;
-  height: 200px;
-  margin: 20px;
-}
-
-.btn.btn-link {
-  font-weight: 500;
-}
-
-.card {
   margin-bottom: 20px;
+}
+.movieCard .card.body {
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: auto;
+  width: 100%;
+  padding: 5px;
+}
+.movieCard img {
+  display: block;
+  height: 300px;
+  margin: auto;
+}
+.movieCard .card-title {
+  text-align: center;
+  font-size: small;
+}
+
+.movieCard-container {
+  padding: 0;
 }
 .movie-poster {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
 }
-.login.view {
-  margin-top: 200px;
+.login-view {
+  margin-top: 100px;
 }
 .registration-view {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 
