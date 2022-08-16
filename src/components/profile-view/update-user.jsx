@@ -72,7 +72,6 @@ function UpdateUser(props) {
 
   return (
     <Form className='profile-form'>
-      <h2>Want to change some info?</h2>
       <Form.Group className="mb-3" controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
