@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
-import { FavMovies } from './favorite-movies';
-import { UpdateUser } from './update-user';
+import FavMovies from './favorite-movies';
+import UpdateUser from './update-user';
 
 
 
