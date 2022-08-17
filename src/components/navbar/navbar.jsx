@@ -25,7 +25,7 @@ export function Menubar({ user }) {
 
   return (
     <Navbar className="main-nav" sticky="top" expand="md" bg="dark" variant="dark">
-      <Container>
+      <Container fluid>
         <Navbar.Brand className="navbar-logo" href="/">MyFlix</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
