@@ -79,7 +79,7 @@ class MainView extends React.Component {
     return (
       <Router>
         <Menubar user={user} />
-        <Container fluid>
+        <Container>
           <Row className="main-view justify-content-md-center mt-3">
             <Route
               exact
