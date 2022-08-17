@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 
@@ -8,10 +9,18 @@ import "./movie-view.scss"
 
 export class MovieView extends React.Component {
 
-  addFavMovie = (movieId) => {
-    let username = localStorage.getItem("user");
-    let token = localStorage.getItem("token");
+  constructor() {
+    super();
+    this.state = {
+      favoriteMovies: []
+    };
+  }
 
+  addFavMovie = (movieId) => {
+    const username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    this.setState({ favoriteMovies: [movieId] });
     axios.post(
       `https://jude-movie-api.herokuapp.com/users/${username}/movies/${movieId}`,
       { headers: { Authorization: `Bearer ${token}` } }
@@ -76,7 +85,7 @@ export class MovieView extends React.Component {
           </Card.Body>
 
           <Card.Footer>
-            <Button className="button ml-2" onClick={() => { this.addFavMovie(movie, user); }}>
+            <Button className="button ml-2" onClick={() => { this.addFavMovie(movie._id); }}>
               Add to favorites
             </Button>
             <Button className="button ml-2" onClick={() => { onBackClick(null); }} >
