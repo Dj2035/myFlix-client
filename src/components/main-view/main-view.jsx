@@ -13,6 +13,7 @@ import { DirectorView } from '../director-view/director-view';
 import { GenreView } from "../genre-view/genre-view";
 import { ProfileView } from '../profile-view/profile-view';
 
+
 import "./main-view.scss";
 
 // Component names should always start with capital letters
@@ -130,9 +131,9 @@ class MainView extends React.Component {
                 return (
                   <Col sm={12} md={8}>
                     <MovieView
-                      user={user}
                       movie={movies.find(m => m._id === match.params.movieId)}
                       onBackClick={() => history.goBack()}
+                      user={user}
                     />
                   </Col>
                 );
@@ -184,7 +185,7 @@ class MainView extends React.Component {
                 if (!user) return <Redirect to="/" />
                 return (
                   <Col>
-                    <UserUpdate
+                    <UpdateUser
                       user={user}
                       onBackClick={() => history.goBack()}
                     />
