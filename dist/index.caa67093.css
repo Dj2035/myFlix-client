@@ -51,31 +51,5 @@ html {
 
 
 
-.fav-movie {
-  margin-bottom: 20px;
-}
-.fav-movie figure {
-  position: relative;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin: auto;
-  width: 100%;
-}
-.fav-movie figure img {
-  display: block;
-  height: 400px;
-  margin: auto;
-}
-.fav-movie figure figcaption {
-  text-align: center;
-}
-.fav-movie button.btn {
-  display: block;
-  margin: auto;
-}
 
-.card {
-  margin-bottom: 20px;
-}
 /*# sourceMappingURL=index.caa67093.css.map */

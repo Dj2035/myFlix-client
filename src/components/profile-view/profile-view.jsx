@@ -182,49 +182,21 @@ export function ProfileView(props) {
           </Card>
         </Col>
       </Row>
-      <Row>
-        <Fragment>
-          {favoriteMoviesList.length === 0 ? (
-            <p>You have no favourite movies yet.</p>
-          ) : (
-            < Card >
-              <Card.Body>
-                <Row>
-                  <Col xs={12}>
-                    <h4>Favorite Movies</h4>
-                  </Col>
-                </Row>
-                <Row>
-                  {favoriteMoviesList.map((movie) => {
-                    return (
-                      <Col xs={12} md={6} lg={3} className="fav-movie">
-                        <Figure Key={movie._id}>
-                          <Link to={`/movies/${movie._id}`}>
-                            <Figure.Image
-                              src={movie.ImagePath}
-                              alt={movie.Title}
-                              crossOrigin="true"
-                            />
-                            <Figure.Caption>
-                              {movie.Title}
-                            </Figure.Caption>
-                          </Link>
-                        </Figure>
-                        <Button variant="secondary" onClick={() => delFavMovie(movie._id)} >Remove</Button>
-                      </Col>
-                    )
-                  })}
-                </Row>
-              </Card.Body>
-            </Card >
-          )
-          }
-        </Fragment>
-      </Row>
 
-      <Button className="button ml-2" onClick={() => { onBackClick(); }} >
-        Back
-      </Button>
+      <div>
+        <h4>Favorite Movies</h4>
+        {favoriteMoviesList.map((movie) => {
+          return (
+            <div Key={movie._id}>
+              <img src={movie.ImagePath} crossOrigin="anonymous" />
+              <Link to={`/movies/${movie._id}`}>
+                <h4>{movie.Title}</h4>
+              </Link>
+              <Button variant="secondary" onClick={() => delFavMovie(movie._id)} >Remove</Button>
+            </div>
+          )
+        })}
+      </div>
 
     </Container >
   )

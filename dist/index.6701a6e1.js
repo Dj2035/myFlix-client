@@ -45889,146 +45889,70 @@ function ProfileView(props) {
                     })
                 ]
             }),
-            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 185
+                    lineNumber: 186
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_react.Fragment, {
-                    __source: {
-                        fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 186
-                    },
-                    __self: this,
-                    children: favoriteMoviesList.length === 0 ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 188
+                            lineNumber: 187
                         },
                         __self: this,
-                        children: "You have no favourite movies yet."
-                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
-                        __source: {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 190
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
+                        children: "Favorite Movies"
+                    }),
+                    favoriteMoviesList.map((movie)=>{
+                        return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                            Key: movie._id,
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 191
+                                lineNumber: 190
                             },
                             __self: this,
                             children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                                /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                                    src: movie.ImagePath,
+                                    crossOrigin: "anonymous",
+                                    __source: {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 191
+                                    },
+                                    __self: this
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                    to: `/movies/${movie._id}`,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
                                         lineNumber: 192
                                     },
                                     __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                                        xs: 12,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
                                             lineNumber: 193
                                         },
                                         __self: this,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
-                                            __source: {
-                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 194
-                                            },
-                                            __self: this,
-                                            children: "Favorite Movies"
-                                        })
+                                        children: movie.Title
                                     })
                                 }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                    variant: "secondary",
+                                    onClick: ()=>delFavMovie(movie._id)
+                                    ,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 197
+                                        lineNumber: 195
                                     },
                                     __self: this,
-                                    children: favoriteMoviesList.map((movie)=>{
-                                        return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Col, {
-                                            xs: 12,
-                                            md: 6,
-                                            lg: 3,
-                                            className: "fav-movie",
-                                            __source: {
-                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 200
-                                            },
-                                            __self: this,
-                                            children: [
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Figure, {
-                                                    Key: movie._id,
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 201
-                                                    },
-                                                    __self: this,
-                                                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Link, {
-                                                        to: `/movies/${movie._id}`,
-                                                        __source: {
-                                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 202
-                                                        },
-                                                        __self: this,
-                                                        children: [
-                                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Figure.Image, {
-                                                                src: movie.ImagePath,
-                                                                alt: movie.Title,
-                                                                crossOrigin: "true",
-                                                                __source: {
-                                                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                                                    lineNumber: 203
-                                                                },
-                                                                __self: this
-                                                            }),
-                                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Figure.Caption, {
-                                                                __source: {
-                                                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                                                    lineNumber: 208
-                                                                },
-                                                                __self: this,
-                                                                children: movie.Title
-                                                            })
-                                                        ]
-                                                    })
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                                    variant: "secondary",
-                                                    onClick: ()=>delFavMovie(movie._id)
-                                                    ,
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 213
-                                                    },
-                                                    __self: this,
-                                                    children: "Remove"
-                                                })
-                                            ]
-                                        }));
-                                    })
+                                    children: "Remove"
                                 })
                             ]
-                        })
+                        }));
                     })
-                })
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                className: "button ml-2",
-                onClick: ()=>{
-                    onBackClick();
-                },
-                __source: {
-                    fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 225
-                },
-                __self: this,
-                children: "Back"
+                ]
             })
         ]
     }));
