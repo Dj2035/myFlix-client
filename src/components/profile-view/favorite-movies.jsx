@@ -10,7 +10,6 @@ function FavMovies(props) {
 
   /*
   const favouriteMoviesId = favouriteMovies.map(m => m._id)
-
   const favouriteMoviesList = movies.filter(m => {
     return favouriteMoviesId.includes(m._id)
   })*/
