@@ -6,13 +6,14 @@ import './profile-view.scss';
 import axios from 'axios';
 
 function FavMovies(props) {
-  const { movies, favouriteMovies, currentUser, token } = props;
+  const { movies, favoriteMoviesList } = props;
 
+  /*
   const favouriteMoviesId = favouriteMovies.map(m => m._id)
 
   const favouriteMoviesList = movies.filter(m => {
     return favouriteMoviesId.includes(m._id)
-  })
+  })*/
 
   const delFavMovie = (movieId) => {
     let url = `https://jude-movie-api.herokuapp.com/users/${currentUser}/movies/${movieId}`;
@@ -28,7 +29,7 @@ function FavMovies(props) {
 
   return (
     <Fragment>
-      {favouriteMoviesList.length === 0 ? (
+      {favoriteMoviesList.length === 0 ? (
         <p>You have no favourite movies yet.</p>
       ) : (
         < Card >
@@ -39,7 +40,7 @@ function FavMovies(props) {
               </Col>
             </Row>
             <Row>
-              {favouriteMoviesList.map((movie) => {
+              {favoriteMoviesList.map((movie) => {
                 return (
                   <Col xs={12} md={6} lg={3} Key={_id} className="fav-movie">
                     <Figure>
