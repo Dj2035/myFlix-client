@@ -12,32 +12,33 @@ import './profile-view.scss';
 export function ProfileView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [favoriteMovies, setFavoriteMovies] = useState({});
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
 
-  const [user, setUserData] = useState("");
-  const [movies, setMovies] = useState([]);
-  const User = localStorage.getItem("user");
+  const [user, setUser] = useState("");
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+
   const token = localStorage.getItem("token");
   const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
 
   const getUser = () => {
+    const user = localStorage.getItem("user");
     axios.get(`https://jude-movie-api.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
         setUsername(response.data.Username)
         setEmail(response.data.Email)
-        setUserData(response.data);
-        setFavoriteMoviesList(response.data.FavoriteMovies);
+        setUser(response.data);
+        setFavoriteMovies(response.data.FavoriteMovies);
         console.log(response);
 
         response.data.FavoriteMovies.forEach((movieId) => {
           let favMovies = props.movies.filter(
             (movie) => movie._id === movieId
           );
-          setMovies(favMovies)
+          setFavoriteMoviesList(favMovies);
+          console.log(favoriteMoviesList)
         });
       })
       .catch((error) => console.error(error));
@@ -49,6 +50,7 @@ export function ProfileView(props) {
 
   // Update Profile
   const handleUpdate = () => {
+    const user = localStorage.getItem("user");
     axios.put(`https://jude-movie-api.herokuapp.com/users/${user}`,
       {
         Username: username,
@@ -73,6 +75,7 @@ export function ProfileView(props) {
 
   // Delete Profile
   const handleDelete = () => {
+    const user = localStorage.getItem("user");
     axios.delete(`https://jude-movie-api.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -85,6 +88,7 @@ export function ProfileView(props) {
   };
 
   const delFavMovie = (movieId) => {
+    const user = localStorage.getItem("user");
     let url = `https://jude-movie-api.herokuapp.com/users/${user}/movies/${movieId}`;
     axios.delete(url, {
       headers: { Authorization: `Bearer ${token}` }
@@ -193,9 +197,9 @@ export function ProfileView(props) {
                 <Row>
                   {favoriteMoviesList.map((movie) => {
                     return (
-                      <Col xs={12} md={6} lg={3} Key={movie._id} className="fav-movie">
-                        <Figure>
-                          <Link to={`/movies/${movies._id}`}>
+                      <Col xs={12} md={6} lg={3} className="fav-movie">
+                        <Figure Key={movie._id}>
+                          <Link to={`/movies/${movie._id}`}>
                             <Figure.Image
                               src={movie.ImagePath}
                               alt={movie.Title}
