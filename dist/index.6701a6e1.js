@@ -45536,30 +45536,29 @@ function ProfileView(props) {
     _s();
     const [username, setUsername] = _react.useState("");
     const [password, setPassword] = _react.useState("");
-    const [favoriteMovies, setFavoriteMovies] = _react.useState({
-    });
     const [email, setEmail] = _react.useState("");
     const [birthday, setBirthday] = _react.useState("");
-    const [user, setUserData] = _react.useState("");
-    const [movies, setMovies] = _react.useState([]);
-    const User = localStorage.getItem("user");
+    const [user, setUser] = _react.useState("");
+    const [favoriteMovies, setFavoriteMovies] = _react.useState([]);
     const token = localStorage.getItem("token");
     const [favoriteMoviesList, setFavoriteMoviesList] = _react.useState([]);
     const getUser = ()=>{
-        _axiosDefault.default.get(`https://jude-movie-api.herokuapp.com/users/${user}`, {
+        const user1 = localStorage.getItem("user");
+        _axiosDefault.default.get(`https://jude-movie-api.herokuapp.com/users/${user1}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
             setUsername(response.data.Username);
             setEmail(response.data.Email);
-            setUserData(response.data);
-            setFavoriteMoviesList(response.data.FavoriteMovies);
+            setUser(response.data);
+            setFavoriteMovies(response.data.FavoriteMovies);
             console.log(response);
             response.data.FavoriteMovies.forEach((movieId)=>{
                 let favMovies = props.movies.filter((movie)=>movie._id === movieId
                 );
-                setMovies(favMovies);
+                setFavoriteMoviesList(favMovies);
+                console.log(favoriteMoviesList);
             });
         }).catch((error)=>console.error(error)
         );
@@ -45569,7 +45568,8 @@ function ProfileView(props) {
     }, []);
     // Update Profile
     const handleUpdate = ()=>{
-        _axiosDefault.default.put(`https://jude-movie-api.herokuapp.com/users/${user}`, {
+        const user1 = localStorage.getItem("user");
+        _axiosDefault.default.put(`https://jude-movie-api.herokuapp.com/users/${user1}`, {
             Username: username,
             Password: password,
             Email: email,
@@ -45588,19 +45588,21 @@ function ProfileView(props) {
     };
     // Delete Profile
     const handleDelete = ()=>{
-        _axiosDefault.default.delete(`https://jude-movie-api.herokuapp.com/users/${user}`, {
+        const user1 = localStorage.getItem("user");
+        _axiosDefault.default.delete(`https://jude-movie-api.herokuapp.com/users/${user1}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then(()=>{
-            alert(`The account ${user.Username} was successfully deleted.`);
+            alert(`The account ${user1.Username} was successfully deleted.`);
             localStorage.clear();
             window.open('/', '_self');
         }).catch((error)=>console.error(error)
         );
     };
     const delFavMovie = (movieId)=>{
-        let url = `https://jude-movie-api.herokuapp.com/users/${user}/movies/${movieId}`;
+        const user1 = localStorage.getItem("user");
+        let url = `https://jude-movie-api.herokuapp.com/users/${user1}/movies/${movieId}`;
         _axiosDefault.default.delete(url, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -45614,14 +45616,14 @@ function ProfileView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 100
+            lineNumber: 104
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 101
+                    lineNumber: 105
                 },
                 __self: this,
                 children: [
@@ -45630,26 +45632,26 @@ function ProfileView(props) {
                         sm: 4,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 102
+                            lineNumber: 106
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 103
+                                lineNumber: 107
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 104
+                                    lineNumber: 108
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 105
+                                            lineNumber: 109
                                         },
                                         __self: this,
                                         children: "Your Info"
@@ -45657,7 +45659,7 @@ function ProfileView(props) {
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 106
+                                            lineNumber: 110
                                         },
                                         __self: this,
                                         children: "Username:"
@@ -45666,7 +45668,7 @@ function ProfileView(props) {
                                         className: "mb-2",
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 109
+                                            lineNumber: 113
                                         },
                                         __self: this,
                                         children: user.Username
@@ -45674,7 +45676,7 @@ function ProfileView(props) {
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 112
+                                            lineNumber: 116
                                         },
                                         __self: this,
                                         children: "Email:"
@@ -45683,7 +45685,7 @@ function ProfileView(props) {
                                         className: "mb-2",
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 115
+                                            lineNumber: 119
                                         },
                                         __self: this,
                                         children: user.Email
@@ -45697,26 +45699,26 @@ function ProfileView(props) {
                         sm: 8,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 122
+                            lineNumber: 126
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 123
+                                lineNumber: 127
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 124
+                                    lineNumber: 128
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 125
+                                            lineNumber: 129
                                         },
                                         __self: this,
                                         children: "Want to change some info?"
@@ -45725,7 +45727,7 @@ function ProfileView(props) {
                                         className: "profile-form",
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 126
+                                            lineNumber: 130
                                         },
                                         __self: this,
                                         children: [
@@ -45734,14 +45736,14 @@ function ProfileView(props) {
                                                 controlId: "formUsername",
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 127
+                                                    lineNumber: 131
                                                 },
                                                 __self: this,
                                                 children: [
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 128
+                                                            lineNumber: 132
                                                         },
                                                         __self: this,
                                                         children: "Username:"
@@ -45755,7 +45757,7 @@ function ProfileView(props) {
                                                         placeholder: "Enter a username",
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 129
+                                                            lineNumber: 133
                                                         },
                                                         __self: this
                                                     })
@@ -45766,14 +45768,14 @@ function ProfileView(props) {
                                                 controlId: "formPassword",
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 138
+                                                    lineNumber: 142
                                                 },
                                                 __self: this,
                                                 children: [
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 139
+                                                            lineNumber: 143
                                                         },
                                                         __self: this,
                                                         children: "Password:"
@@ -45788,7 +45790,7 @@ function ProfileView(props) {
                                                         placeholder: "Your password must be 6 or more characters",
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 140
+                                                            lineNumber: 144
                                                         },
                                                         __self: this
                                                     })
@@ -45799,14 +45801,14 @@ function ProfileView(props) {
                                                 controlId: "formEmail",
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 150
+                                                    lineNumber: 154
                                                 },
                                                 __self: this,
                                                 children: [
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 151
+                                                            lineNumber: 155
                                                         },
                                                         __self: this,
                                                         children: "Email:"
@@ -45820,7 +45822,7 @@ function ProfileView(props) {
                                                         placeholder: "Enter your email address",
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 152
+                                                            lineNumber: 156
                                                         },
                                                         __self: this
                                                     })
@@ -45831,14 +45833,14 @@ function ProfileView(props) {
                                                 controlId: "formBirthday",
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 161
+                                                    lineNumber: 165
                                                 },
                                                 __self: this,
                                                 children: [
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 162
+                                                            lineNumber: 166
                                                         },
                                                         __self: this,
                                                         children: "Birthday:"
@@ -45851,7 +45853,7 @@ function ProfileView(props) {
                                                         required: true,
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 163
+                                                            lineNumber: 167
                                                         },
                                                         __self: this
                                                     })
@@ -45863,7 +45865,7 @@ function ProfileView(props) {
                                                 onClick: handleUpdate,
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 170
+                                                    lineNumber: 174
                                                 },
                                                 __self: this,
                                                 children: "Update profile"
@@ -45874,7 +45876,7 @@ function ProfileView(props) {
                                                 onClick: handleDelete,
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 173
+                                                    lineNumber: 177
                                                 },
                                                 __self: this,
                                                 children: "Delete profile"
@@ -45890,52 +45892,52 @@ function ProfileView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 181
+                    lineNumber: 185
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_react.Fragment, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 182
+                        lineNumber: 186
                     },
                     __self: this,
                     children: favoriteMoviesList.length === 0 ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 184
+                            lineNumber: 188
                         },
                         __self: this,
                         children: "You have no favourite movies yet."
                     }) : /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 186
+                            lineNumber: 190
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 187
+                                lineNumber: 191
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 188
+                                        lineNumber: 192
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                         xs: 12,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 189
+                                            lineNumber: 193
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 190
+                                                lineNumber: 194
                                             },
                                             __self: this,
                                             children: "Favorite Movies"
@@ -45945,7 +45947,7 @@ function ProfileView(props) {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 193
+                                        lineNumber: 197
                                     },
                                     __self: this,
                                     children: favoriteMoviesList.map((movie)=>{
@@ -45953,25 +45955,25 @@ function ProfileView(props) {
                                             xs: 12,
                                             md: 6,
                                             lg: 3,
-                                            Key: movie._id,
                                             className: "fav-movie",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 196
+                                                lineNumber: 200
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Figure, {
+                                                    Key: movie._id,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 197
+                                                        lineNumber: 201
                                                     },
                                                     __self: this,
                                                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Link, {
-                                                        to: `/movies/${movies._id}`,
+                                                        to: `/movies/${movie._id}`,
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 198
+                                                            lineNumber: 202
                                                         },
                                                         __self: this,
                                                         children: [
@@ -45981,14 +45983,14 @@ function ProfileView(props) {
                                                                 crossOrigin: "true",
                                                                 __source: {
                                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                                    lineNumber: 199
+                                                                    lineNumber: 203
                                                                 },
                                                                 __self: this
                                                             }),
                                                             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Figure.Caption, {
                                                                 __source: {
                                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                                    lineNumber: 204
+                                                                    lineNumber: 208
                                                                 },
                                                                 __self: this,
                                                                 children: movie.Title
@@ -46002,7 +46004,7 @@ function ProfileView(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 209
+                                                        lineNumber: 213
                                                     },
                                                     __self: this,
                                                     children: "Remove"
@@ -46023,7 +46025,7 @@ function ProfileView(props) {
                 },
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 221
+                    lineNumber: 225
                 },
                 __self: this,
                 children: "Back"
@@ -46031,7 +46033,7 @@ function ProfileView(props) {
         ]
     }));
 }
-_s(ProfileView, "bilKzLSnJ2v2QSMNLl8oqPdaJts=");
+_s(ProfileView, "VIdM3dDCNNhQVXlaimy2VZijarQ=");
 _c = ProfileView;
 ProfileView.propTypes = {
     profileView: _propTypesDefault.default.shape({
