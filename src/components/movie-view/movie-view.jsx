@@ -8,21 +8,23 @@ import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import "./movie-view.scss"
 
 export class MovieView extends React.Component {
-
   constructor() {
     super();
+
     this.state = {
-      favoriteMovies: []
+      movies: [],
+      user: null,
     };
   }
 
-  addFavMovie = (movieId) => {
+  addFavMovie = (movie, user) => {
     const username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
+    console.log(movie);
+    console.log(token);
 
-    this.setState({ favoriteMovies: [movieId] });
     axios.post(
-      `https://jude-movie-api.herokuapp.com/users/${username}/movies/${movieId}`,
+      `https://jude-movie-api.herokuapp.com/users/${username}/movies/${movie._id}`, {},
       { headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -36,7 +38,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, onBackClick, user } = this.props;
 
     return (
       <Container className="movie-view">
@@ -85,7 +87,7 @@ export class MovieView extends React.Component {
           </Card.Body>
 
           <Card.Footer>
-            <Button className="button ml-2" onClick={() => { this.addFavMovie(movie._id); }}>
+            <Button className="button ml-2" onClick={() => { this.addFavMovie(movie, user); }}>
               Add to favorites
             </Button>
             <Button className="button ml-2" onClick={() => { onBackClick(null); }} >
