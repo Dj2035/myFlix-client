@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'react-bootstrap';
+import { Card, Col } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
 
@@ -11,14 +11,23 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Card className="movieCard" >
-        <Link to={`/movies/${movie._id}`}>
-          <Card.Img crossOrigin="true" variant="top" src={movie.ImagePath} />
-          <Card.Body>
-            <Card.Title>{movie.Title}</Card.Title>
-          </Card.Body>
-        </Link>
-      </Card>
+      <Col
+        xs={{ span: 8, offset: 1 }}
+        sm={{ span: 6, offset: 2 }}
+        md={{ span: 5, offset: 0 }}
+        lg={4}
+        xl={3}
+        className="mb-3"
+      >
+        <Card className="movieCard" >
+          <Link to={`/movies/${movie._id}`}>
+            <Card.Img crossOrigin="true" variant="top" src={movie.ImagePath} />
+            <Card.Body>
+              <Card.Title>{movie.Title}</Card.Title>
+            </Card.Body>
+          </Link>
+        </Card>
+      </Col>
     );
   }
 }
@@ -28,6 +37,6 @@ export class MovieCard extends React.Component {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string,
-    Description: PropTypes.string
-  }).isRequired,
+    ImagePath: PropTypes.string
+  }).isRequired
 };
