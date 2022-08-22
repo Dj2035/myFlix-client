@@ -1,16 +1,50 @@
-html {
-  background-color: #051622;
+@charset "UTF-8";
+body {
+  font-family: "Barlow", sans-serif !important;
+  font-size: 1.2rem !important;
+  background: linear-gradient(90deg, rgb(170, 170, 170) 0%, rgb(220, 220, 220) 15%, rgb(220, 220, 220) 85%, rgb(170, 170, 170) 100%);
+  min-height: 100vh;
 }
 
-.app-container {
-  background-color: #051622;
+.my-flix {
+  font-size: 2em;
 }
 
-@media (max-width: 797px) {
-  body {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
+.movie-view {
+  margin: 1em;
+  padding: 1em;
+  background-color: white;
+  width: 350px;
+  border-radius: 3px;
+}
+
+.fw-light {
+  font-weight: 300;
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 200;
+}
+
+.validation-message {
+  color: red;
+  font-weight: 500;
+  padding-left: 5px;
+  font-style: italic;
+}
+
+.validation-message::before {
+  content: "↪ ";
+}
+
+.view-background {
+  background: linear-gradient(90deg, rgb(170, 170, 170) 0%, rgb(220, 220, 220) 15%, rgb(220, 220, 220) 85%, rgb(170, 170, 170) 100%);
+  min-height: 100vh;
 }
 .movieCard {
   margin-bottom: 20px;
@@ -36,10 +70,23 @@ html {
 .movieCard-container {
   padding: 0;
 }
-.movie-poster {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
+.poster {
+  object-fit: cover;
+  object-position: 50% 50%;
+  width: 100%;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 3rem;
+}
+
+.specs {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 500;
+  padding-right: 10px;
 }
 .login-view {
   margin-top: 100px;
@@ -47,7 +94,37 @@ html {
 .registration-view {
   margin-top: 50px;
 }
+.main-view-width {
+  width: 100vw;
+  margin: auto;
+}
 
+.specs {
+  font-size: 1.6rem;
+  font-weight: 200;
+  color: var(--white);
+}
+
+@media (min-width: 768px) {
+  .main-view-width {
+    width: 82vw;
+  }
+}
+@media (min-width: 1400px) {
+  .main-view-width {
+    width: 70vw;
+  }
+}
+@media (min-width: 1600px) {
+  .main-view-width {
+    width: 62vw;
+  }
+}
+@media (min-width: 1900px) {
+  .main-view-width {
+    width: 55vw;
+  }
+}
 
 
 
