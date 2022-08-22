@@ -2,7 +2,6 @@ import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card, Form, Button, Figure } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
 
 //import FavMovies from './favorite-movies';
 //import UpdateUser from './update-user';
@@ -10,16 +9,17 @@ import PropTypes from 'prop-types';
 import './profile-view.scss';
 
 export function ProfileView(props) {
+  const { onBackClick, movies, handleFavorite } = props;
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [favoriteMovies, setFavoriteMovies] = useState({});
 
   const [user, setUser] = useState("");
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
-
-  const token = localStorage.getItem("token");
   const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
+  const token = localStorage.getItem("token");
 
   const getUser = () => {
     const user = localStorage.getItem("user");
@@ -37,7 +37,7 @@ export function ProfileView(props) {
           let favMovies = props.movies.filter(
             (movie) => movie._id === movieId
           );
-          setFavoriteMoviesList(favMovies);
+          setFavoriteMoviesList(favMovies.concat(favoriteMovies));
           console.log(favoriteMoviesList)
         });
       })
@@ -86,19 +86,6 @@ export function ProfileView(props) {
       })
       .catch(error => console.error(error))
   };
-
-  const delFavMovie = (movieId) => {
-    const user = localStorage.getItem("user");
-    let url = `https://jude-movie-api.herokuapp.com/users/${user}/movies/${movieId}`;
-    axios.delete(url, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(() => {
-        alert(`The movie was successfully deleted.`)
-        window.open('/users/:username', '_self');
-      }).
-      catch(error => console.error(error))
-  }
 
   return (
     <Container >
@@ -183,31 +170,45 @@ export function ProfileView(props) {
         </Col>
       </Row>
 
-      <div>
-        <h4>Favorite Movies</h4>
-        {favoriteMoviesList.map((movie) => {
-          return (
-            <div Key={movie._id}>
-              <img src={movie.ImagePath} crossOrigin="anonymous" />
-              <Link to={`/movies/${movie._id}`}>
-                <h4>{movie.Title}</h4>
-              </Link>
-              <Button variant="secondary" onClick={() => delFavMovie(movie._id)} >Remove</Button>
-            </div>
-          )
-        })}
-      </div>
+      <h1 className="subtitle mt-4">LIST OF ♥️ MOVIES:</h1>
+      {favoriteMoviesList.length !== 0 ? (
+        <Row className="justify-content-center mt-3">
+          {favoriteMoviesList.map((movie) => {
+            return (
+              <Col xs={12} md={6} lg={3} Key={movie._id} className="fav-movie">
+                <Figure>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Figure.Image
+                      src={movie.ImagePath}
+                      alt={movie.Title}
+                      crossOrigin="anonymous"
+                    />
+                    <Figure.Caption>
+                      {movie.Title}
+                    </Figure.Caption>
+                  </Link>
+                </Figure>
+                <Button
+                  variant="outline-danger"
+                  className="mt-2 ml-auto"
+                  style={{ width: '100%' }}
+                  onClick={() => handleFavorite(movie._id, 'remove')}
+                >
+                  Remove from ♥️
+                </Button>
+              </Col>
+            );
+          })}
+        </Row>
+      ) : (
+        <h2 className="subtitle">
+          <span className="text-danger">
+            You don't have movies in your favorite movies list.
+          </span>
+        </h2>
+      )}
 
     </Container >
   )
 
 }
-
-ProfileView.propTypes = {
-  profileView: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Password: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.string,
-  }),
-};
