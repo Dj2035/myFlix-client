@@ -1,57 +1,132 @@
-
-.movieCard {
-  width: 100%;
-  height: 200px;
-  margin: 20px;
+@charset "UTF-8";
+body {
+  font-family: "Barlow", sans-serif !important;
+  font-size: 1.2rem !important;
+  background: linear-gradient(90deg, rgb(170, 170, 170) 0%, rgb(220, 220, 220) 15%, rgb(220, 220, 220) 85%, rgb(170, 170, 170) 100%);
+  min-height: 100vh;
 }
 
-.btn.btn-link {
+.my-flix {
+  font-size: 2em;
+}
+
+.movie-view {
+  margin: 1em;
+  padding: 1em;
+  background-color: white;
+  width: 350px;
+  border-radius: 3px;
+}
+
+.fw-light {
+  font-weight: 300;
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 200;
+}
+
+.validation-message {
+  color: red;
   font-weight: 500;
+  padding-left: 5px;
+  font-style: italic;
 }
 
-.card {
+.validation-message::before {
+  content: "↪ ";
+}
+
+.view-background {
+  background: linear-gradient(90deg, rgb(170, 170, 170) 0%, rgb(220, 220, 220) 15%, rgb(220, 220, 220) 85%, rgb(170, 170, 170) 100%);
+  min-height: 100vh;
+}
+.movieCard {
   margin-bottom: 20px;
 }
-.movie-poster {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-.login.view {
-  margin-top: 200px;
-}
-.registration-view {
-  margin-top: 100px;
-}
-
-
-
-
-.fav-movie {
-  margin-bottom: 20px;
-}
-.fav-movie figure {
+.movieCard .card.body {
   position: relative;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: auto;
   width: 100%;
+  padding: 5px;
 }
-.fav-movie figure img {
+.movieCard img {
   display: block;
-  height: 400px;
+  height: 300px;
   margin: auto;
 }
-.fav-movie figure figcaption {
+.movieCard .card-title {
   text-align: center;
+  font-size: small;
 }
-.fav-movie button.btn {
-  display: block;
+
+.movieCard-container {
+  padding: 0;
+}
+.poster {
+  object-fit: cover;
+  object-position: 50% 50%;
+  width: 100%;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 3rem;
+}
+
+.specs {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 500;
+  padding-right: 10px;
+}
+.login-view {
+  margin-top: 100px;
+}
+.registration-view {
+  margin-top: 50px;
+}
+.main-view-width {
+  width: 100vw;
   margin: auto;
 }
 
-.card {
-  margin-bottom: 20px;
+.specs {
+  font-size: 1.6rem;
+  font-weight: 200;
+  color: var(--white);
 }
+
+@media (min-width: 768px) {
+  .main-view-width {
+    width: 82vw;
+  }
+}
+@media (min-width: 1400px) {
+  .main-view-width {
+    width: 70vw;
+  }
+}
+@media (min-width: 1600px) {
+  .main-view-width {
+    width: 62vw;
+  }
+}
+@media (min-width: 1900px) {
+  .main-view-width {
+    width: 55vw;
+  }
+}
+
+
+
+
 /*# sourceMappingURL=index.caa67093.css.map */

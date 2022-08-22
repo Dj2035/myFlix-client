@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Button, Row, Col, Card } from "react-bootstrap";
 
 import "./genre-view.scss";
 
@@ -11,7 +11,7 @@ export class GenreView extends React.Component {
 
     return (
       <>
-        <Card className="genre-view">
+        <Card className="genre-view" bg="dark" >
           <Card.Header className="genre-view-header">{genre.Name}</Card.Header>
           <Card.Body>
             <Row>

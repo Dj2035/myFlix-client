@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 function UpdateUser(props) {
-  const { user } = props;
+  const { handleDelete, user } = props
+  let token = localStorage.getItem("token");
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -43,10 +44,11 @@ function UpdateUser(props) {
 
   // Update Profile
   const handleUpdate = () => {
+    e.preventDefault();
     const isReq = validate();
     if (isReq) {
-      const token = localStorage.getItem('token');
-      axios.put(`https://jude-movie-api.herokuapp.com/users/${user.Username}`,
+
+      axios.put(`https://jude-movie-api.herokuapp.com/users/${user}`,
         {
           Username: username,
           Password: password,
@@ -65,14 +67,12 @@ function UpdateUser(props) {
         })
         .catch((e) => {
           console.log('Error');
-          alert('Unable to update profile.');
         });
     }
   };
 
   return (
     <Form className='profile-form'>
-      <h2>Want to change some info?</h2>
       <Form.Group className="mb-3" controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -121,6 +121,9 @@ function UpdateUser(props) {
       </Form.Group>
       <Button variant="primary" type="submit" onClick={handleUpdate}>
         Update profile
+      </Button>
+      <Button className="d-block mt-2" variant="danger" onClick={handleDelete}>
+        Delete profile
       </Button>
     </Form>
   )

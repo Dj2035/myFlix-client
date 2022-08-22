@@ -1,28 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button, Figure } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
-import { FavMovies } from './favorite-movies';
-import { UpdateUser } from './update-user';
-
-
+//import FavMovies from './favorite-movies';
+//import UpdateUser from './update-user';
 
 import './profile-view.scss';
 
 export function ProfileView(props) {
-  const [user, setUser] = useState(props.user);
-  const [movies, setMovies] = useState(props.movies);
-  const [favouriteMovies, setFavouriteMovies] = useState([]);
-  const currentUser = localStorage.getItem('user');
-  const token = localStorage.getItem('token');
+  const { onBackClick, movies, handleFavorite } = props;
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [favoriteMovies, setFavoriteMovies] = useState({});
+
+  const [user, setUser] = useState("");
+  const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
+  const token = localStorage.getItem("token");
 
   const getUser = () => {
-    axios.get(`https://jude-movie-api.herokuapp.com/users/${currentUser}`, {
+    const user = localStorage.getItem("user");
+    axios.get(`https://jude-movie-api.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
+        setUsername(response.data.Username)
+        setEmail(response.data.Email)
         setUser(response.data);
-        setFavouriteMovies(response.data.FavouriteMovies)
+        setFavoriteMovies(response.data.FavoriteMovies);
+        console.log(response);
+
+        response.data.FavoriteMovies.forEach((movieId) => {
+          let favMovies = props.movies.filter(
+            (movie) => movie._id === movieId
+          );
+          setFavoriteMoviesList(favMovies.concat(favoriteMovies));
+          console.log(favoriteMoviesList)
+        });
       })
       .catch((error) => console.error(error));
   };
@@ -31,58 +48,165 @@ export function ProfileView(props) {
     getUser();
   }, [])
 
+  // Update Profile
+  const handleUpdate = () => {
+    const user = localStorage.getItem("user");
+    axios.put(`https://jude-movie-api.herokuapp.com/users/${user}`,
+      {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((response) => {
+        alert('Your profile has been updated');
+        localStorage.setItem("user", response.data.Username),
+          console.log(response.data);
+        window.open('/', '_self');
+      })
+      .catch((e) => {
+        console.log('Error');
+      });
+  };
+
   // Delete Profile
   const handleDelete = () => {
-    axios.delete(`https://jude-movie-api.herokuapp.com/users/${currentUser}`, {
+    const user = localStorage.getItem("user");
+    axios.delete(`https://jude-movie-api.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(() => {
         alert(`The account ${user.Username} was successfully deleted.`)
         localStorage.clear();
-        window.open('/register', '_self');
+        window.open('/', '_self');
       })
       .catch(error => console.error(error))
   };
 
   return (
-    <Container>
+    <Container >
       <Row>
         <Col xs={12} sm={4}>
           <Card>
-            <Card.Title>Your Info</Card.Title>
-            <Card.Body>
-              <Row className="mb-2">
-                <Col className="label" xs lg="3">Username: </Col>
-                <Col className="value" xs lg="9">{user.Username}</Col>
+            <Card.Body >
+              <Card.Title>Your Info</Card.Title>
+              <Row>
+                Username:
               </Row>
               <Row className="mb-2">
-                <Col className="label" xs lg="3">Email: </Col>
-                <Col className="value" xs lg="9">{user.Email}</Col>
+                {user.Username}
+              </Row>
+              <Row>
+                Email:
+              </Row>
+              <Row className="mb-2">
+                {user.Email}
               </Row>
             </Card.Body>
           </Card>
-
         </Col>
+
         <Col xs={12} sm={8}>
           <Card>
             <Card.Body>
-              <UpdateUser user={user} />
-              <Button className="d-block mt-5" variant="danger" onClick={handleDelete}>Delete profile</Button>
+              <Card.Title>Want to change some info?</Card.Title>
+              <Form className='profile-form'>
+                <Form.Group className="mb-3" controlId="formUsername">
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={user.Username}
+                    onChange={e => setUsername(e.target.value)}
+                    required
+                    placeholder="Enter a username"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formPassword">
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value="*******"
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    minLength="6"
+                    placeholder="Your password must be 6 or more characters"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formEmail">
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control
+                    type="email"
+                    defaultValue={user.Email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                    placeholder="Enter your email address"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBirthday">
+                  <Form.Label>Birthday:</Form.Label>
+                  <Form.Control
+                    type="date"
+                    defaultValue={user.Birthday}
+                    onChange={e => setBirthday(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Button variant="primary" type="submit" onClick={handleUpdate}>
+                  Update profile
+                </Button>
+                <Button className="d-block mt-2" variant="danger" onClick={handleDelete}>
+                  Delete profile
+                </Button>
+              </Form>
             </Card.Body>
           </Card>
         </Col>
       </Row>
-      <Row>
-        <FavMovies
-          movies={movies}
-          favouriteMovies={favouriteMovies}
-          currentUser={currentUser}
-          token={token}
-        />
-      </Row>
-      <Button className="button ml-2" onClick={() => { onBackClick(null); }} >
-        Back
-      </Button>
+
+      <h1 className="subtitle mt-4">LIST OF ♥️ MOVIES:</h1>
+      {favoriteMoviesList.length !== 0 ? (
+        <Row className="justify-content-center mt-3">
+          {favoriteMoviesList.map((movie) => {
+            return (
+              <Col xs={12} md={6} lg={3} Key={movie._id} className="fav-movie">
+                <Figure>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Figure.Image
+                      src={movie.ImagePath}
+                      alt={movie.Title}
+                      crossOrigin="anonymous"
+                    />
+                    <Figure.Caption>
+                      {movie.Title}
+                    </Figure.Caption>
+                  </Link>
+                </Figure>
+                <Button
+                  variant="outline-danger"
+                  className="mt-2 ml-auto"
+                  style={{ width: '100%' }}
+                  onClick={() => handleFavorite(movie._id, 'remove')}
+                >
+                  Remove from ♥️
+                </Button>
+              </Col>
+            );
+          })}
+        </Row>
+      ) : (
+        <h2 className="subtitle">
+          <span className="text-danger">
+            You don't have movies in your favorite movies list.
+          </span>
+        </h2>
+      )}
 
     </Container >
   )

@@ -13,6 +13,7 @@ import { DirectorView } from '../director-view/director-view';
 import { GenreView } from "../genre-view/genre-view";
 import { ProfileView } from '../profile-view/profile-view';
 
+
 import "./main-view.scss";
 
 // Component names should always start with capital letters
@@ -23,7 +24,8 @@ class MainView extends React.Component {
     // Initial state is set to null
     this.state = {
       movies: [],
-      user: null
+      user: null,
+      favoriteMovies: [],
     };
   }
 
@@ -52,6 +54,50 @@ class MainView extends React.Component {
       });
   }
 
+  handleFavorite = (movieId, action) => {
+    const { user, favoriteMovies } = this.state;
+    const accessToken = localStorage.getItem('token');
+    if (accessToken !== null && user !== null) {
+      // Add MovieID to Favorites (local state & webserver)
+      if (action === 'add') {
+        this.setState({ favoriteMovies: [...favoriteMovies, movieId] });
+        axios
+          .post(
+            `https://jude-movie-api.herokuapp.com/users/${user}/movies/${movieId}`,
+            {},
+            {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            }
+          )
+          .then((res) => {
+            console.log(`Movie added to ${user} Favorite movies`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        // Remove MovieID from Favorites (local state & webserver)
+      } else if (action === 'remove') {
+        this.setState({
+          favoriteMovies: favoriteMovies.filter((id) => id !== movieId),
+        });
+        axios
+          .delete(
+            `https://jude-movie-api.herokuapp.com/users/${user}/movies/${movieId}`,
+            {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            }
+          )
+          .then((res) => {
+            console.log(`Movie removed from ${user} Favorite movies`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+  };
+
   /* When a user successfully logs in, this function updates the `user` 
   property in state to that *particular user*/
   onLoggedIn(authData) {
@@ -74,13 +120,13 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state; //ES6 feature for const movies = this.state.movies
+    const { movies, user, favoriteMovies } = this.state; //ES6 feature for const movies = this.state.movies
 
     return (
       <Router>
         <Menubar user={user} />
         <Container fluid>
-          <Row className="main-view justify-content-md-center">
+          <Row className="main-view-width mx-auto justify-content-md-center mt-3">
             <Route
               exact
               path="/"
@@ -89,7 +135,7 @@ class MainView extends React.Component {
                   return (
                     <Col>
                       <LoginView
-                        onLoggedIn={(user) => this.onLoggedIn(user)}
+                        onLoggedIn={user => this.onLoggedIn(user)}
                       />
                     </Col>
                   );
@@ -97,9 +143,9 @@ class MainView extends React.Component {
                 if (movies.length === 0) return <div className="main-view" />;
 
                 return movies.map(m => (
-                  <Col md={3} key={m._id}>
-                    <MovieCard movie={m} />
-                  </Col>
+                  <MovieCard key={m._id} movie={m} >
+                    {m.title}
+                  </MovieCard>
                 ));
               }} />
 
@@ -128,17 +174,16 @@ class MainView extends React.Component {
                 if (movies.length === 0) return <div className="main-view" />;
 
                 return (
-                  <Col md={8}>
-                    <MovieView
-                      user={user}
-                      movie={movies.find(m => m._id === match.params.movieId)}
-                      onBackClick={() => history.goBack()}
-                    />
-                  </Col>
+                  <MovieView
+                    movie={movies.find(m => m._id === match.params.movieId)}
+                    isFavorite={favoriteMovies.includes(match.params.movieId)}
+                    onBackClick={history.goBack}
+                    handleFavorite={this.handleFavorite}
+                  />
                 );
               }} />
 
-            <Route path="/directors/:name" render={({ match, history }) => {
+            <Route path="/directors/:directorName" render={({ match, history }) => {
 
               if (!user) return <Col>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -146,11 +191,11 @@ class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
 
               return <Col md={8}>
-                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
+                <DirectorView director={movies.find(m => m.Director.Name === match.params.directorName).Director} onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
-            <Route path="/genres/:name" render={({ match, history }) => {
+            <Route path="/genres/:genreName" render={({ match, history }) => {
 
               if (!user) return <Col>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -158,7 +203,7 @@ class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
 
               return <Col md={8}>
-                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
+                <GenreView genre={movies.find(m => m.Genre.Name === match.params.genreName).Genre} onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
@@ -171,8 +216,9 @@ class MainView extends React.Component {
                   <Col>
                     <ProfileView
                       movies={movies}
-                      user={user}
-                      onBackClick={() => history.goBack()}
+                      onBackClick={history.goBack}
+                      favoriteMovies={favoriteMovies}
+                      handleFavorite={this.handleFavorite}
                     />
                   </Col>
                 );
@@ -184,7 +230,7 @@ class MainView extends React.Component {
                 if (!user) return <Redirect to="/" />
                 return (
                   <Col>
-                    <UserUpdate
+                    <UpdateUser
                       user={user}
                       onBackClick={() => history.goBack()}
                     />
