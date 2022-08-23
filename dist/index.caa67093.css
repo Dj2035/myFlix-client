@@ -128,5 +128,30 @@ body {
 
 
 
+.fav-movie {
+  margin-bottom: 15px;
+}
+.fav-movie figcaption {
+  text-align: center;
+}
+.fav-movie button.btn {
+  display: block;
+  margin: auto;
+}
 
+.card {
+  margin-bottom: 15px;
+}
+.card figure {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  margin: auto;
+  width: 100%;
+}
+.card figure img {
+  height: 400px;
+  margin: auto;
+}
 /*# sourceMappingURL=index.caa67093.css.map */
