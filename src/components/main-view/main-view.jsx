@@ -55,7 +55,8 @@ class MainView extends React.Component {
   }
 
   handleFavorite = (movieId, action) => {
-    const { user, favoriteMovies } = this.state;
+    const { favoriteMovies } = this.state;
+    const user = localStorage.getItem("user");
     const accessToken = localStorage.getItem('token');
     if (accessToken !== null && user !== null) {
       // Add MovieID to Favorites (local state & webserver)
@@ -219,20 +220,6 @@ class MainView extends React.Component {
                       onBackClick={history.goBack}
                       favoriteMovies={favoriteMovies}
                       handleFavorite={this.handleFavorite}
-                    />
-                  </Col>
-                );
-              }} />
-
-            <Route
-              path={`/user-update/${user}`}
-              render={({ history }) => {
-                if (!user) return <Redirect to="/" />
-                return (
-                  <Col>
-                    <UpdateUser
-                      user={user}
-                      onBackClick={() => history.goBack()}
                     />
                   </Col>
                 );
