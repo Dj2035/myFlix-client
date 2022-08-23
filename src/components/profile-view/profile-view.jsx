@@ -31,14 +31,15 @@ export function ProfileView(props) {
         setEmail(response.data.Email)
         setUser(response.data);
         setFavoriteMovies(response.data.FavoriteMovies);
-        console.log(response);
+        console.log(movies)
 
-        response.data.FavoriteMovies.forEach((movieId) => {
-          let favMovies = props.movies.filter(
+        favoriteMovies.forEach((movieId) => {
+          let favMovies = movies.filter(
             (movie) => movie._id === movieId
           );
-          setFavoriteMoviesList(favMovies.concat(favoriteMovies));
-          console.log(favoriteMoviesList)
+          setFavoriteMoviesList((prevState) => [...prevState, ...favMovies]);
+          //setFavoriteMoviesList(favMovies.concat(favoriteMovies));
+
         });
       })
       .catch((error) => console.error(error));
@@ -170,7 +171,7 @@ export function ProfileView(props) {
         </Col>
       </Row>
 
-      <h1 className="subtitle mt-4">LIST OF ♥️ MOVIES:</h1>
+      <h1 className="subtitle mt-4">FAVORITE MOVIES</h1>
       {favoriteMoviesList.length !== 0 ? (
         <Row className="justify-content-center mt-3">
           {favoriteMoviesList.map((movie) => {
