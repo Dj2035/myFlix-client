@@ -9,13 +9,12 @@ import { Link } from "react-router-dom";
 import './profile-view.scss';
 
 export function ProfileView(props) {
-  const { onBackClick, movies, handleFavorite } = props;
+  const { movies, handleFavorite } = props;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [favoriteMovies, setFavoriteMovies] = useState({});
 
   const [user, setUser] = useState("");
   const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
@@ -27,22 +26,24 @@ export function ProfileView(props) {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        setUsername(response.data.Username)
-        setEmail(response.data.Email)
+        setUsername(response.data.Username);
+        setEmail(response.data.Email);
         setUser(response.data);
-        setFavoriteMovies(response.data.FavoriteMovies);
-        console.log(movies)
-
-        favoriteMovies.forEach((movieId) => {
-          let favMovies = movies.filter(
+        setFavoriteMoviesList(response.data.FavoriteMovies);
+        console.log(favoriteMoviesList);
+        /*response.data.FavoriteMovies.forEach((movieId) => {
+          let favMovies = props.movies.filter(
             (movie) => movie._id === movieId
           );
-          setFavoriteMoviesList((prevState) => [...prevState, ...favMovies]);
+          setFavoriteMoviesList(favMovies);
+
+          //setFavoriteMoviesList((prevState) => prevState.concat(favMovies));
+          //setFavoriteMoviesList((prevState) => [...prevState, ...favMovies]);
           //setFavoriteMoviesList(favMovies.concat(favoriteMovies));
 
-        });
+        });*/
       })
-      .catch((error) => console.error(error));
+      .catch(error => console.error(error));
   };
 
   useEffect(() => {
@@ -93,19 +94,15 @@ export function ProfileView(props) {
       <Row>
         <Col xs={12} sm={4}>
           <Card>
-            <Card.Body >
-              <Card.Title>Your Info</Card.Title>
+            <Card.Header as="h4">Your Info</Card.Header>
+            <Card.Body>
               <Row>
-                Username:
-              </Row>
-              <Row className="mb-2">
-                {user.Username}
+                <Col className="label fw-bold">Username:</Col>
+                <Col className="label mb-2">{user.Username}</Col>
               </Row>
               <Row>
-                Email:
-              </Row>
-              <Row className="mb-2">
-                {user.Email}
+                <Col className="label fw-bold">Email:</Col>
+                <Col className="label mb-2">{user.Email}</Col>
               </Row>
             </Card.Body>
           </Card>
@@ -113,8 +110,8 @@ export function ProfileView(props) {
 
         <Col xs={12} sm={8}>
           <Card>
+            <Card.Header as="h4">Want to change some info?</Card.Header>
             <Card.Body>
-              <Card.Title>Want to change some info?</Card.Title>
               <Form className='profile-form'>
                 <Form.Group className="mb-3" controlId="formUsername">
                   <Form.Label>Username:</Form.Label>
@@ -174,9 +171,10 @@ export function ProfileView(props) {
       <h1 className="subtitle mt-4">FAVORITE MOVIES</h1>
       {favoriteMoviesList.length !== 0 ? (
         <Row className="justify-content-center mt-3">
-          {favoriteMoviesList.map((movie) => {
+          {favoriteMoviesList.map((movieId) => {
+            let movie = movies.find((m) => m._id === movieId);
             return (
-              <Col xs={12} md={6} lg={3} Key={movie._id} className="fav-movie">
+              <Col xs={12} md={6} lg={3} className="fav-movie">
                 <Figure>
                   <Link to={`/movies/${movie._id}`}>
                     <Figure.Image
