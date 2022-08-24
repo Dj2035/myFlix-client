@@ -90,6 +90,7 @@ class MainView extends React.Component {
             }
           )
           .then((res) => {
+            window.open('/users/:username', '_self');
             console.log(`Movie removed from ${user} Favorite movies`);
           })
           .catch((err) => {
