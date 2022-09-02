@@ -11,11 +11,11 @@ export class GenreView extends React.Component {
 
     return (
       <>
-        <Card className="genre-view" bg="dark" >
-          <Card.Header className="genre-view-header">{genre.Name}</Card.Header>
+        <Card className="genre-view">
+          <Card.Header as="h2" className="genre-view-header text-center">{genre.Name}</Card.Header>
           <Card.Body>
             <Row>
-              <Col className="label">Description:</Col>
+              <Col className="label fw-bold">Description:</Col>
             </Row>
           </Card.Body>
           <Card.Body>
@@ -25,12 +25,13 @@ export class GenreView extends React.Component {
           </Card.Body>
           <Card.Footer>
             <Button
+              variant="warning"
               className="mt-1"
               onClick={() => {
                 onBackClick(null);
               }}
             >
-              Back
+              « Back
             </Button>
           </Card.Footer>
         </Card>

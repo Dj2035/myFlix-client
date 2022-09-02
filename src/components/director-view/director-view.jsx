@@ -10,20 +10,20 @@ export class DirectorView extends React.Component {
     const { director, onBackClick } = this.props;
 
     return (
-      <Container className="director-view">
+      <Container className="director-view mt-5">
         <Card>
-          <Card.Header className="value">
+          <Card.Header as="h2" className="value text-center">
             {director.Name}
           </Card.Header>
           <Card.Body>
             <Row>
-              <Col className="label" md={3}>Born on:</Col>
+              <Col className="label fw-bold" md={3}>Born on:</Col>
               <Col className="value">{director.Birth}</Col>
             </Row>
           </Card.Body>
           <Card.Body>
             <Row>
-              <Col className="label">Biography:</Col>
+              <Col className="label fw-bold">Biography:</Col>
             </Row>
             <br />
             <Row>
@@ -32,12 +32,13 @@ export class DirectorView extends React.Component {
           </Card.Body>
           <Card.Footer>
             <Button
-              className="mt-1"
+              className="my-4"
+              variant="warning"
               onClick={() => {
                 onBackClick(null);
               }}
             >
-              Back
+              « Back
             </Button>
           </Card.Footer>
         </Card>
