@@ -1,23 +1,49 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import axios from 'axios';
 
 import { Button, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import "./movie-view.scss"
 
 export class MovieView extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.addFavMovie = this.addFavMovie.bind(this)
+  }
+
+  addFavMovie(movie) {
+    console.log(movie);
+
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+
+    axios.post(`https://jude-movie-api.herokuapp.com/users/${user}/movies/${movie._id}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(() => {
+        alert('Movie successfully added to favorites.')
+        window.open(`/users/${user}`, '_self');
+      })
+      .catch(error => console.error(error))
+  }
+
+
+
 
   render() {
-    const { movie, onBackClick, isFavorite, handleFavorite } = this.props;
+    const { movie, onBackClick, isFavorite } = this.props;
 
     if (!movie) return <div></div>;
     return (
       <Col
         className="container p-3 justify-content-center"
-        md={9}
-        lg={7}
-        xl={6}
+        md={10}
+        lg={8}
       >
         <Row className="justify-content-start">
           <Col sm={6}>
@@ -68,20 +94,18 @@ export class MovieView extends React.Component {
                 <span className="value">: {movie.Description}</span>
               </div>
 
+              <Button
+                className="my-4"
+                variant="outline-primary"
+                onClick={() => this.addFavMovie(movie)}
+              >
+                Add to Favorite
+              </Button>
+
+              <br />
               <Button className="my-4" variant="warning" onClick={() => { onBackClick(null); }}>
                 « Back
               </Button>
-              {!isFavorite ? (
-                <Button
-                  className="my-4 ml-2"
-                  variant="outline-primary"
-                  onClick={() => handleFavorite(movie._id, 'add')}
-                >
-                  Add to 🤍 Movies
-                </Button>
-              ) : (
-                <div>🤍</div>
-              )}
             </div>
           </Col>
         </Row>
