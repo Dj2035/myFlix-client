@@ -1,14 +1,19 @@
-import React from 'react';
+import React from "react";
+import { Col, Row, Card } from 'react-bootstrap';
 
-function UserInfo(props) {
-  const { user } = props;
+
+export function UserInfo({ email, name }) {
+
   return (
-    <>
-      <h4>Your Info</h4>
-      <p>Username: {user.Username}</p>
-      <p>Email: {user.Email}</p>
-    </>
+    <Row>
+      <Col>
+
+        <Card.Header as="h5">Your Info</Card.Header>
+        <br />
+        <p>Username: {name}</p>
+        <p>Email: {email}</p>
+
+      </Col>
+    </Row>
   )
 }
-
-export default UserInfo
