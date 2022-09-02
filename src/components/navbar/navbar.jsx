@@ -30,15 +30,9 @@ export function Menubar({ user }) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            {isAuth() && <Link to={`/users/${user}`}>{user}</Link>}
+            {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
             {isAuth() && (
-              <Button variant="link" onClick={handleLogOut}>Logout</Button>
-            )}
-            {isAuth() && (
-              <Link to="/">Sign-in</Link>
-            )}
-            {isAuth() && (
-              <Link to="/register">Sign-up</Link>
+              <Nav.Link variant="button" onClick={handleLogOut}>Logout</Nav.Link>
             )}
 
           </Nav>
