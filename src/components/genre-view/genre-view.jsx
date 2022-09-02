@@ -25,12 +25,13 @@ export class GenreView extends React.Component {
           </Card.Body>
           <Card.Footer>
             <Button
+              variant="warning"
               className="mt-1"
               onClick={() => {
                 onBackClick(null);
               }}
             >
-              Back
+              « Back
             </Button>
           </Card.Footer>
         </Card>
