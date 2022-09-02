@@ -46,30 +46,6 @@ body {
   background: linear-gradient(90deg, rgb(170, 170, 170) 0%, rgb(220, 220, 220) 15%, rgb(220, 220, 220) 85%, rgb(170, 170, 170) 100%);
   min-height: 100vh;
 }
-.movieCard {
-  margin-bottom: 20px;
-}
-.movieCard .card.body {
-  position: relative;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin: auto;
-  width: 100%;
-  padding: 5px;
-}
-.movieCard img {
-  display: block;
-  height: 300px;
-  margin: auto;
-}
-.movieCard .card-title {
-  text-align: center;
-  font-size: small;
-}
-
-.movieCard-container {
-  padding: 0;
-}
 .poster {
   object-fit: cover;
   object-position: 50% 50%;
@@ -129,4 +105,28 @@ body {
 
 
 
+.movieCard {
+  margin-bottom: 20px;
+}
+.movieCard .card.body {
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: auto;
+  width: 100%;
+  padding: 5px;
+}
+.movieCard img {
+  display: block;
+  height: 300px;
+  margin: auto;
+}
+.movieCard .card-title {
+  text-align: center;
+  font-size: small;
+}
+
+.movieCard-container {
+  padding: 0;
+}
 /*# sourceMappingURL=index.caa67093.css.map */
