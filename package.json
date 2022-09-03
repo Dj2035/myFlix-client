@@ -1,11 +1,11 @@
 {
   "name": "myflix-client",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.html",
+  "description": "Client side of the myFix api, built with the MERN stack",
+  "source": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel",
+    "start": "parcel src/index.html",
     "build": "parcel build"
   },
   "repository": {
