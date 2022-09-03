@@ -54,5 +54,7 @@ Using React to build the client-side for an application called myFlix-client, ba
 - Displays favorite movies
 - Allows users to remove a movie from their list of favorites
 
+![This is a screenshot of the myFlix/Client App](myFlix-Client.png)
+
 #### Contact
 [GitHub](https://github.com/Dj2035)
