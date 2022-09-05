@@ -141,7 +141,7 @@ body {
 }
 .fav-movie figure img {
   display: block;
-  height: 400px;
+  height: 300px;
   margin: auto;
 }
 .fav-movie figure figcaption {
