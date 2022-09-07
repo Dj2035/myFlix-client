@@ -128,8 +128,8 @@ class MainView extends React.Component {
             return (
               <MovieView
                 movie={movies.find(m => m._id === match.params.movieId)}
-                onBackClick={history.goBack}
                 user={user}
+                onBackClick={history.goBack}
               />
             );
           }} />
