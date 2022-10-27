@@ -6,9 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
-    "build": "react-scripts build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "build": "parcel build src/index.html",
+    "deploy": "rm -rf dist/ && npm run build && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -33,7 +32,6 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-rc.0",
-    "gh-pages": "^4.0.0"
+    "@parcel/transformer-sass": "^2.0.0-rc.0"
   }
 }
