@@ -1,0 +1,158 @@
+.movieCard {
+  margin-bottom: 20px;
+}
+.movieCard .card.body {
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: auto;
+  width: 100%;
+  padding: 5px;
+}
+.movieCard img {
+  display: block;
+  height: 300px;
+  margin: auto;
+}
+.movieCard .card-title {
+  text-align: center;
+  font-size: small;
+}
+
+.movieCard-container {
+  padding: 0;
+}
+
+.registration-view {
+  margin-top: 50px;
+}
+.login-view {
+  margin-top: 100px;
+}
+.poster {
+  object-fit: cover;
+  object-position: 50% 50%;
+  width: 100%;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 3rem;
+}
+
+.specs {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 500;
+  padding-right: 10px;
+}
+
+
+.fav-movie {
+  margin-bottom: 15px;
+}
+.fav-movie figure {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  margin: auto;
+  width: 100%;
+}
+.fav-movie figure img {
+  display: block;
+  height: 300px;
+  margin: auto;
+}
+.fav-movie figure figcaption {
+  text-align: center;
+}
+.fav-movie button.btn {
+  display: block;
+  margin: auto;
+}
+
+.card {
+  margin-bottom: 15px;
+}
+.main-view-width {
+  width: 100vw;
+  margin: auto;
+}
+
+.specs {
+  font-size: 1.6rem;
+  font-weight: 200;
+  color: var(--white);
+}
+
+@media (min-width: 768px) {
+  .main-view-width {
+    width: 82vw;
+  }
+}
+@media (min-width: 1400px) {
+  .main-view-width {
+    width: 70vw;
+  }
+}
+@media (min-width: 1600px) {
+  .main-view-width {
+    width: 62vw;
+  }
+}
+@media (min-width: 1900px) {
+  .main-view-width {
+    width: 55vw;
+  }
+}
+@charset "UTF-8";
+body {
+  font-family: "Barlow", sans-serif !important;
+  font-size: 1.2rem !important;
+  background: linear-gradient(90deg, rgb(170, 170, 170) 0%, rgb(220, 220, 220) 15%, rgb(220, 220, 220) 85%, rgb(170, 170, 170) 100%);
+  min-height: 100vh;
+}
+
+.my-flix {
+  font-size: 2em;
+}
+
+.movie-view {
+  margin: 1em;
+  padding: 1em;
+  background-color: white;
+  width: 350px;
+  border-radius: 3px;
+}
+
+.fw-light {
+  font-weight: 300;
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 200;
+}
+
+.validation-message {
+  color: red;
+  font-weight: 500;
+  padding-left: 5px;
+  font-style: italic;
+}
+
+.validation-message::before {
+  content: "↪ ";
+}
+
+.view-background {
+  background: linear-gradient(90deg, rgb(170, 170, 170) 0%, rgb(220, 220, 220) 15%, rgb(220, 220, 220) 85%, rgb(170, 170, 170) 100%);
+  min-height: 100vh;
+}
+/*# sourceMappingURL=index.3f764291.css.map */
