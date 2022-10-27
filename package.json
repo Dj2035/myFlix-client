@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/Dj2035/myFlix-client/issues"
   },
-  "homepage": "https://github.com/Dj2035/myFlix-client#readme",
+  "homepage": "https://Dj2035.github.io/myFlix-client",
   "dependencies": {
     "axios": "^0.27.2",
     "parcel": "^2.0.0-rc.0",
@@ -31,6 +32,7 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-rc.0"
+    "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "gh-pages": "^4.0.0"
   }
 }
