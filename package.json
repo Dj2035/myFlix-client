@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/Dj2035/myFlix-client/issues"
   },
-  "homepage": "https://Dj2035.github.io/myFlix-client",
+  "homepage": "https://dj2035.github.io/myFlix-client",
   "dependencies": {
     "axios": "^0.27.2",
     "parcel": "^2.0.0-rc.0",
